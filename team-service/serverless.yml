@@ -2,7 +2,7 @@ service: team
 app: test-task
 tenant: vadimnapalkov
 
-frameworkVersion: ">=1.1.0 <2.0.0"
+frameworkVersion: '>=1.1.0 <2.0.0'
 
 provider:
   name: aws
@@ -10,18 +10,18 @@ provider:
   stage: dev
   region: us-east-1
   environment:
-    TEAM_TABLE: team-${opt:stage, self:provider.stage}
-    USER_TABLE: user-${opt:stage, self:provider.stage}
-    FRONT_URL: http://localhost:8080
-    SMTP_HOST: smtp.yandex.ru"
-    SMTP_PORT: 587
-    SMTP_USER: test.mailer@kodep.ru
-    SMTP_PASS: hot6Zoot
+    TEAM_TABLE: 'your team teable'
+    USER_TABLE: 'your user teable'
+    FRONT_URL: 'your front url'
+    SMTP_HOST: 'your smtp host'
+    SMTP_PORT: 'your smtp port'
+    SMTP_USER: 'your smtp user'
+    SMTP_PASS: 'your smtp pass'
   iamRoleStatements:
     - Effect: Allow
       Action:
         - dynamodb:*
-      Resource: "*"
+      Resource: '*'
 
 package:
   individually: true
@@ -85,7 +85,7 @@ resources:
             - Id: ApiGateway
               DomainName:
                 Fn::Join:
-                  - "."
+                  - '.'
                   - - Ref: ApiGatewayRestApi
                     - execute-api
                     - us-east-1
@@ -95,31 +95,31 @@ resources:
                 HTTPPort: 80
                 HTTPSPort: 443
                 OriginProtocolPolicy: https-only
-        TeamTable:
-          Type: "AWS::DynamoDB::Table"
-          DeletionPolicy: Retain
-          Properties:
-            AttributeDefinitions:
-              - AttributeName: id
-                AttributeType: S
-            KeySchema:
-              - AttributeName: id
-                KeyType: HASH
-            ProvisionedThroughput:
-              ReadCapacityUnits: 1
-              WriteCapacityUnits: 1
-            TableName: ${self:provider.environment.TEAM_TABLE}
-        UserTable:
-          Type: "AWS::DynamoDB::Table"
-          DeletionPolicy: Retain
-          Properties:
-            AttributeDefinitions:
-              - AttributeName: id
-                AttributeType: S
-            KeySchema:
-              - AttributeName: id
-                KeyType: HASH
-            ProvisionedThroughput:
-              ReadCapacityUnits: 1
-              WriteCapacityUnits: 1
-            TableName: ${self:provider.environment.USER_TABLE}
+    # TeamTable:
+    #   Type: "AWS::DynamoDB::Table"
+    #   DeletionPolicy: Retain
+    #   Properties:
+    #     AttributeDefinitions:
+    #       - AttributeName: id
+    #         AttributeType: S
+    #     KeySchema:
+    #       - AttributeName: id
+    #         KeyType: HASH
+    #     ProvisionedThroughput:
+    #       ReadCapacityUnits: 1
+    #       WriteCapacityUnits: 1
+    #     TableName: ${self:provider.environment.TEAM_TABLE}
+    # UserTable:
+    #   Type: "AWS::DynamoDB::Table"
+    #   DeletionPolicy: Retain
+    #   Properties:
+    #     AttributeDefinitions:
+    #       - AttributeName: id
+    #         AttributeType: S
+    #     KeySchema:
+    #       - AttributeName: id
+    #         KeyType: HASH
+    #     ProvisionedThroughput:
+    #       ReadCapacityUnits: 1
+    #       WriteCapacityUnits: 1
+    #     TableName: ${self:provider.environment.USER_TABLE}

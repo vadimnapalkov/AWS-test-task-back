@@ -1,4 +1,4 @@
-const dynamoose = require("dynamoose");
+const dynamoose = require('dynamoose');
 
 const { Schema } = dynamoose;
 

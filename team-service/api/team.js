@@ -1,29 +1,32 @@
-"use strict";
-const uuid = require("uuid");
+'use strict';
+const uuid = require('uuid');
 
-const { Team } = require("../models/team");
-const resWriter = require("../utils/resWriter");
+const { Team } = require('../models/team');
+const sendJson = require('../utils/sendJson');
+const sendError = require('../utils/sendError');
 
 exports.getAll = async function(event) {
-  const teams = await Team.scan()
-    .exec()
-    .catch(err => {
-      return resWriter(err, 500);
-    });
+  try {
+    const teams = await Team.scan().exec();
 
-  return resWriter(teams, 200);
+    return sendJson(teams, 200);
+  } catch (err) {
+    return sendError(err, 500);
+  }
 };
 
 exports.create = async function(event) {
-  const { name, description } = JSON.parse(event.body);
+  try {
+    const { name, description } = JSON.parse(event.body);
 
-  const team = await Team.create({
-    id: uuid(),
-    name,
-    description
-  }).catch(err => {
-    return resWriter(err, 500);
-  });
+    const team = await Team.create({
+      id: uuid(),
+      name,
+      description
+    });
 
-  return resWriter(team, 200);
+    return sendJson(team, 200);
+  } catch (err) {
+    return sendError(err, 500);
+  }
 };
