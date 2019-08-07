@@ -61,7 +61,7 @@ functions:
   serverless-rest-api-with-dynamodb-dev-delete: arn:aws:lambda:us-east-1:488110005556:function:serverless-rest-api-with-dynamodb-dev-delete
 ```
 
-#Local testing
+# Local testing
 You can test the lambda function locally using the command:
 ```
 sls invoke local -f {functionName}
