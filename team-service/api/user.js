@@ -13,8 +13,8 @@ exports.getMembersTeam = async function(event) {
     const members = await User.scan({ teamId }).exec();
 
     return sendJson({ members }, 200);
-  } catch (err) {
-    return sendError(err, 500);
+  } catch (error) {
+    return sendError(error, 500);
   }
 };
 
@@ -31,8 +31,8 @@ exports.create = async function(event) {
     });
 
     return sendJson(user, 200);
-  } catch (err) {
-    return sendError(err, 500);
+  } catch (error) {
+    return sendError(error, 500);
   }
 };
 
@@ -42,7 +42,7 @@ exports.inviteUsersInTeam = async function(event) {
     await mapLimit(users, 1, async user => sendInvitation({ user, teamId }));
 
     return sendJson({ message: 'Success' }, 200);
-  } catch (err) {
-    return sendError(err, 500);
+  } catch (error) {
+    return sendError(error, 500);
   }
 };

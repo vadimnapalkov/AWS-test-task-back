@@ -10,8 +10,8 @@ exports.getAll = async function(event) {
     const teams = await Team.scan().exec();
 
     return sendJson(teams, 200);
-  } catch (err) {
-    return sendError(err, 500);
+  } catch (error) {
+    return sendError(error, 500);
   }
 };
 
@@ -26,7 +26,7 @@ exports.create = async function(event) {
     });
 
     return sendJson(team, 200);
-  } catch (err) {
-    return sendError(err, 500);
+  } catch (error) {
+    return sendError(error, 500);
   }
 };
